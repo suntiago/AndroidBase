@@ -1,6 +1,9 @@
 package com.suntiago.network.network.download;
 
 
+import com.suntiago.network.network.download.DownloadEntry.DownloadStatus;
+import com.suntiago.network.network.utils.Slog;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,9 +11,7 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import com.suntiago.network.network.download.DownloadEntry.DownloadStatus;
-import com.suntiago.network.network.utils.Slog;
+import java.net.URLEncoder;
 
 /**
  * @des Download thread.
@@ -51,7 +52,15 @@ public class DownloadThread implements Runnable {
         status = DownloadEntry.DownloadStatus.downloading;
         HttpURLConnection connection = null;
         try {
-            connection = (HttpURLConnection) new URL(url).openConnection();
+            String utf_8url = "";
+            for (int i = 0; i < url.length(); i++) {
+                String a = url.charAt(i) + "";
+                if (!"!@#$&*()+:/;?+'".contains(url.charAt(i) + "")) {
+                    a = URLEncoder.encode(a, "utf-8");
+                }
+                utf_8url += a;
+            }
+            connection = (HttpURLConnection) new URL(utf_8url).openConnection();
             connection.setRequestMethod("GET");
             if (!isSingleDownload) {
                 connection.setRequestProperty("Range", "bytes=" + startPos + "-" + endPos);
