@@ -6,7 +6,7 @@
               android:background="@color/filter_text_bg_color"
               android:orientation="vertical">
 
-    <viroyal.com.baseui.flowLayout.filter.FilterView
+    <com.suntiago.baseui.flowLayout.filter.FilterView
         android:id="@+id/province_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

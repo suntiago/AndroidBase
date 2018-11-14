@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="viroyal.com.getpermission">
+          package="com.suntiago.getpermission">
 
     <application>
         <activity
-            android:name=".rxpermissions.ShadowActivity"
+            android:name="com.suntiago.getpermission.rxpermissions.ShadowActivity"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             />

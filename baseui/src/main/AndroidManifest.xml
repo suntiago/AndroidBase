@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="viroyal.com.baseui">
+          package="com.suntiago.baseui">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application>
-        <activity android:name=".lockPattern.CreateGestureActivity"/>
-        <activity android:name=".lockPattern.GestureLoginActivity"/>
+        <activity android:name="com.suntiago.baseui.lockPattern.CreateGestureActivity"/>
+        <activity android:name="com.suntiago.baseui.lockPattern.GestureLoginActivity"/>
     </application>
 </manifest>

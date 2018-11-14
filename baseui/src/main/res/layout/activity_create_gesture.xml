@@ -5,7 +5,7 @@
     android:background="@color/grey_f6f6f6"
     android:orientation="vertical">
 
-    <viroyal.com.baseui.lockPattern.widget.LockPatternIndicator
+    <com.suntiago.baseui.lockPattern.widget.LockPatternIndicator
         android:id="@+id/lockPatterIndicator"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -29,7 +29,7 @@
         android:layout_marginTop="20dp"
         android:orientation="vertical">
 
-        <viroyal.com.baseui.lockPattern.widget.LockPatternView
+        <com.suntiago.baseui.lockPattern.widget.LockPatternView
             android:id="@+id/lockPatternView"
             android:layout_width="270dp"
             android:layout_height="270dp" />

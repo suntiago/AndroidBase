@@ -4,47 +4,25 @@ ext {
             appVerName     : '1.0.1',
             applicationId  : 'com.viroyal.base',
             refix          : 'BASE',
-//            srcDirs        : UnilifeConfig.school.srcDirs,
-//            assetsDirs     : UnilifeConfig.school.assetsDirs,
             minifyEnabled  : false,
             shrinkResources: false,
             zipAlignEnabled: true
     ]
 
-//    platformKey = [
-//            RONG_CLOUND_APP_KEY   : UnilifeConfig.school.product.rongAppKey,
-//            RONH_CLOUND_APP_SECRET: UnilifeConfig.school.product.rongAppSecret,
-//            MOB_APP_KEY           : UnilifeConfig.school.mobAppKey,
-//            MOB_APP_SECRET        : UnilifeConfig.school.mobAppSecret,
-//            AMAP_API_KEY          : UnilifeConfig.school.amapApikey,
-//            AMAP_WEB_API_KEY      : UnilifeConfig.school.amapWebApiKey,
-//            ALI_APP_KEY           : UnilifeConfig.school.aliAppKey,
-//            ALI_APP_SECRET        : UnilifeConfig.school.aliAppSecret,
-//            ALI_OSS_HOSTNAME      : UnilifeConfig.school.aliOssHostName
-//    ]
-
-    db = [
-//            name            : UnilifeConfig.school.product.db_name,
-//            sp_name_prefixes: UnilifeConfig.school.product.sp_name_prefixes,
-            targetGenDir    : 'src/main/java',
-            daoPackage      : 'com.viroyal.commonlib.db.dao',
-            schemaVersion   : 28
-    ]
-
     android = [
-            minSdkVersion             : 17,
-            targetSdkVersion          : 23,
-            compileSdkVersion         : 25,
+            minSdkVersion             : 16,
+            targetSdkVersion          : 28,
+            compileSdkVersion         : 26,
             buildToolsVersion         : "26.0.2",
             sourceCompatibilityVersion: JavaVersion.VERSION_1_8,
             targetCompatibilityVersion: JavaVersion.VERSION_1_8
     ]
 
     sign = [
-            storeFile       : '../app/viroyalSignKey.jks',
-            storePassword   : '84159009',
-            keyAlias        : 'viroyal-nj',
-            keyPassword     : '84159009',
+            storeFile       : '../app/jeremy.keystore',
+            storePassword   : '12345678',
+            keyAlias        : 'jeremy.keystore',
+            keyPassword     : '12345678',
             v2SigningEnabled: false
     ]
 
