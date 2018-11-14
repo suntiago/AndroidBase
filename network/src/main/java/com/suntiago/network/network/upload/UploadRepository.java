@@ -13,6 +13,11 @@ import com.alibaba.sdk.android.oss.common.auth.OSSCredentialProvider;
 import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.suntiago.network.network.Api;
+import com.suntiago.network.network.BaseRspObserver;
+import com.suntiago.network.network.UpdateApi;
+import com.suntiago.network.network.rsp.FileUploadResponse;
+import com.suntiago.network.network.utils.Slog;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -25,11 +30,6 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
-import com.suntiago.network.network.Api;
-import com.suntiago.network.network.BaseRspObserver;
-import com.suntiago.network.network.UpdateApi;
-import com.suntiago.network.network.rsp.FileUploadResponse;
-import com.suntiago.network.network.utils.Slog;
 
 /**
  * 上传文件数据仓库类.
@@ -42,9 +42,9 @@ public class UploadRepository {
     static String sAliHostName = "http://viroyalcampus.oss-cn-shanghai.aliyuncs.com";
     static String sBucketOther = "其他";
     static String sSchoolName = "百家湖中学";
-//    static String sApiHost = "https://139.196.3.125:8443/home/ossinfo";
+    //    static String sApiHost = "https://139.196.3.125:8443/home/ossinfo";
     static String sApiHost = "https://mcpapi.iyuyun.net:18443/home/ossinfo";
-//    static String sMasterKey = "abcdefghijkopqrstuvwxyz123456";
+    //    static String sMasterKey = "abcdefghijkopqrstuvwxyz123456";
     static String sMasterKey = "tUnmjGTZglI49CQWmsqhJQmSs83V2Y1e";
     static String sSchoolId = "1002";
 
@@ -73,7 +73,7 @@ public class UploadRepository {
 
     private static void uploadToOss(Context context, String path, String folder, String name,
                                     OssAttributesResponse.OssAttributes oss,
-                                    ApiCallback callback) {
+                                    final ApiCallback callback) {
         Slog.d(TAG, "uploadToOss  [context, path, folder, name, oss, callback]:");
         File file = new File(path);
         if (!file.exists()) {
@@ -109,7 +109,7 @@ public class UploadRepository {
         // 异步上传，可以设置进度回调
         //put.setProgressCallback((request, currentSize, totalSize) ->
         String finalName = name;
-        String finalRecallUrl = sAliHostName + "/" + encodeUTF8(finalName);
+        final String finalRecallUrl = sAliHostName + "/" + encodeUTF8(finalName);
         ossClient.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest,
                 PutObjectResult>() {
             @Override
@@ -161,9 +161,9 @@ public class UploadRepository {
      * @return
      * @throws
      */
-    public static void upload(Context context,
-                              String filePath, String folder,
-                              String name, ApiCallback callback) {
+    public static void upload(final Context context,
+                              final String filePath,  String folder,
+                              final String name, final ApiCallback callback) {
         if (!new File(filePath).exists()) {
             FileUploadResponse r = new FileUploadResponse();
             r.error_code = -1;
@@ -178,7 +178,7 @@ public class UploadRepository {
         }
         folder = sSchoolName + "/" + folder;
         //先调用Oss接口获取Oss信息
-        String finalFolder = folder;
+        final String finalFolder = folder;
         getOssInfo(new Action1<OssAttributesResponse>() {
             @Override
             public void call(OssAttributesResponse info) {
@@ -194,7 +194,7 @@ public class UploadRepository {
         });
     }
 
-    private static void getOssInfo(Action1<OssAttributesResponse> callback) {
+    private static void getOssInfo(final Action1<OssAttributesResponse> callback) {
         Api.get().getApi(UpdateApi.class)
                 .getOssInfo(sApiHost, sMasterKey, sSchoolId)
                 .subscribeOn(Schedulers.io())
@@ -263,7 +263,7 @@ public class UploadRepository {
      * @return
      * @throws
      */
-    public static void upload(String localpath, String usage, Action1<FileUploadResponse> action1) {
+    public static void upload(String localpath, String usage, final Action1<FileUploadResponse> action1) {
         Slog.d(TAG, "upload  [id, filepath, pkgName, action]:");
         File file = new File(localpath);
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
@@ -273,8 +273,11 @@ public class UploadRepository {
                 .uploadFile(usage, body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseRspObserver<FileUploadResponse>(FileUploadResponse.class, r -> {
-                    action1.call(r);
+                .subscribe(new BaseRspObserver<FileUploadResponse>(FileUploadResponse.class, new Action1<FileUploadResponse>() {
+                    @Override
+                    public void call(FileUploadResponse fileUploadResponse) {
+                        action1.call(fileUploadResponse);
+                    }
                 }));
     }
 }

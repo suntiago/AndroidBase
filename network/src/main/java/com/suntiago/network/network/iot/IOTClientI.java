@@ -16,10 +16,6 @@ import com.aliyun.alink.linksdk.channel.core.persistent.event.PersistentEventDis
 import com.aliyun.alink.linksdk.channel.core.persistent.mqtt.MqttInitParams;
 import com.aliyun.alink.linksdk.channel.core.persistent.mqtt.request.MqttPublishRequest;
 import com.aliyun.alink.linksdk.tools.ALog;
-
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import com.suntiago.network.network.Api;
 import com.suntiago.network.network.UpdateApi;
 import com.suntiago.network.network.rsp.DeviceSecretResponse;
@@ -27,6 +23,10 @@ import com.suntiago.network.network.rsp.MacRequest;
 import com.suntiago.network.network.utils.MacUtil;
 import com.suntiago.network.network.utils.SPUtils;
 import com.suntiago.network.network.utils.Slog;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static com.aliyun.alink.linksdk.channel.core.persistent.PersistentConnectState.CONNECTFAIL;
 
@@ -87,7 +87,7 @@ public class IOTClientI implements IOTClient {
     }
 
     //从网路拉去三元组信息
-    private void getDeviceSecret(String deviceName) {
+    private void getDeviceSecret(final String deviceName) {
         Slog.d(TAG, "getDeviceSecret  [deviceName]:");
         if (TextUtils.isEmpty(deviceName)) {
             this.deviceName = MacUtil.getLocalMacAddressFromIp();

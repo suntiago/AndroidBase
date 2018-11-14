@@ -22,11 +22,10 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility rootProject.ext.android.sourceCompatibilityVersion
-        targetCompatibility rootProject.ext.android.targetCompatibilityVersion
-    }
-    buildToolsVersion '26.0.2'
+//    compileOptions {
+//        sourceCompatibility rootProject.ext.android.sourceCompatibilityVersion
+//        targetCompatibility rootProject.ext.android.targetCompatibilityVersion
+//    }
 }
 
 dependencies {
@@ -56,7 +55,7 @@ ext {
     // 在用到的代码上依赖的代码compile 'com.suntiago.network:encrypt:1.0.0'
     PUBLISH_GROUP_ID = 'com.suntiago.network'
     PUBLISH_ARTIFACT_ID = 'encrypt'
-    PUBLISH_VERSION = '1.0.0'
+    PUBLISH_VERSION = '1.0.1'
 }
 
 uploadArchives {

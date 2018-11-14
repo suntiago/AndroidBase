@@ -1,5 +1,7 @@
 package com.suntiago.network.network;
 
+import com.suntiago.network.network.utils.Slog;
+
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -24,7 +26,6 @@ import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import com.suntiago.network.network.utils.Slog;
 
 /**
  * Created by shengpeng on 2016-04-14.
@@ -116,7 +117,12 @@ public class HttpManager {
             sslContext.init(null, trustManager, new SecureRandom());
             SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
             client.sslSocketFactory(sslSocketFactory);
-            client.hostnameVerifier((hostname, session) -> true);
+            client.hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String s, SSLSession sslSession) {
+                    return true;
+                }
+            });
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (KeyManagementException e) {
