@@ -34,12 +34,19 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile files('libs/rxbus.jar')
+
+
+    compile 'com.suntiago.network:encrypt:1.0.0'
+
+    compile 'com.suntiago.dblib:encrypt:1.0.0'
+
+    compile 'com.suntiago.getpermission:encrypt:1.0.0'
     //网络请求框架
-    compile project(':network')
+    //compile project(':network')
     //数据库框架
-    compile project(':dblib')
+    //compile project(':dblib')
     //动态申请权限的框架
-    compile project(':getpermission')
+    //compile project(':getpermission')
 }
 
 ext {

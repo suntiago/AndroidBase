@@ -16,12 +16,23 @@ android {
         flavorDimensions "versionCode"
     }
 
+//    signingConfigs {
+//        myConfig {
+//            storeFile file("viroyalSignKey.jks")
+//            storePassword "84159009"
+//            keyAlias "viroyal-nj"
+//            keyPassword "84159009"
+//        }
+//    }
+
+
     signingConfigs {
         myConfig {
-            storeFile file("viroyalSignKey.jks")
-            storePassword "84159009"
-            keyAlias "viroyal-nj"
-            keyPassword "84159009"
+            storeFile file(rootProject.ext.sign.storeFile)
+            storePassword rootProject.ext.sign.storePassword
+            keyAlias rootProject.ext.sign.keyAlias
+            keyPassword rootProject.ext.sign.keyPassword
+            v2SigningEnabled rootProject.ext.sign.v2SigningEnabled
         }
     }
 
