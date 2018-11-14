@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        applicationId "viroyal.com.p20_face"
+        versionCode rootProject.ext.app.appVerCode
+        versionName rootProject.ext.app.appVerName
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions "versionCode"
+    }
+
+    signingConfigs {
+        myConfig {
+            storeFile file("viroyalSignKey.jks")
+            storePassword "84159009"
+            keyAlias "viroyal-nj"
+            keyPassword "84159009"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.myConfig
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.myConfig
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.android.sourceCompatibilityVersion
+        targetCompatibility rootProject.ext.android.targetCompatibilityVersion
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                // apk_渠道名-版本号-版本名称-编译时间.apk
+                def fileName ="${rootProject.ext.app.refix}_v${versionName}_${releaseTime()}_${variant.buildType.name}.apk"
+                outputFileName = fileName
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation rootProject.ext.dependencies.appcompatV7
+
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    compile project(':baseui')
+}
+def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("GMT+8"))
+}
