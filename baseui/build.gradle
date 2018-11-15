@@ -38,27 +38,27 @@ dependencies {
     compile files('libs/rxbus.jar')
 
 
-    compile 'com.suntiago.network:encrypt:1.0.0'
+   /* compile 'com.suntiago.network:encrypt:1.0.0'
 
     compile 'com.suntiago.dblib:encrypt:1.0.0'
 
-    compile 'com.suntiago.getpermission:encrypt:1.0.0'
+    compile 'com.suntiago.getpermission:encrypt:1.0.0'*/
     //网络请求框架
-    //compile project(':network')
+    compile project(':network')
     //数据库框架
-    //compile project(':dblib')
+    compile project(':dblib')
     //动态申请权限的框架
-    //compile project(':getpermission')
+    compile project(':getpermission')
 }
 
-ext {
+/*ext {
     // 这个路径是从Github上Clone的本地路径
     GITHUB_REPO_PATH = "D:\\work\\gitPrj\\AndroidBase"
     // 在用到的代码上依赖的代码compile 'com.suntiago.network:encrypt:1.0.0'
     PUBLISH_GROUP_ID = 'com.suntiago.baseui'
     PUBLISH_ARTIFACT_ID = 'encrypt'
     PUBLISH_VERSION = '1.0.0'
-}
+}*/
 
 //uploadArchives {
 //    repositories.mavenDeployer {

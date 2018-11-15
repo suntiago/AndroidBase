@@ -23,8 +23,8 @@ allprojects {
         maven {
             url "http://maven.aliyun.com/nexus/content/repositories/releases/"
         }
-
         maven { url "https://raw.githubusercontent.com/suntiago/AndroidBase/master" }
+        maven { url "https://jitpack.io" }
     }
 
 }
