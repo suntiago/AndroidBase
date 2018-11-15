@@ -62,12 +62,12 @@ ext {
 
 uploadArchives {
     repositories.mavenDeployer {
-        def deployPath = file(project.GITHUB_REPO_PATH)
+        def deployPath = file("D:\\work\\gitPrj\\AndroidBase")
         repository(url: "file://${deployPath.absolutePath}")
         pom.project {
-            groupId project.PUBLISH_GROUP_ID
-            artifactId project.PUBLISH_ARTIFACT_ID
-            version project.PUBLISH_VERSION
+            groupId 'com.suntiago.baseui'
+            artifactId 'encrypt'
+            version '1.0.0'
         }
     }
 }
