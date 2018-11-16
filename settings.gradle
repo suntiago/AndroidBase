@@ -1,1 +1,1 @@
-include ':app', ':network', ':dblib', ':baseui', ':getpermission'
+include ':app', ':baseui'
