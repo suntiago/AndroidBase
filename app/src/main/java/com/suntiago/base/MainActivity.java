@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.suntiago.baseui.activity.SlothActivity;
-import com.suntiago.baseui.flowLayout.ProvincePicker;
-import com.suntiago.baseui.lockPattern.PatternManager;
-import com.suntiago.baseui.utils.Slog;
+import com.suntiago.baseui.utils.log.Slog;
+import com.suntiago.filterview.flowLayout.ProvincePicker;
 import com.suntiago.getpermission.rxpermissions.RxPermissions;
+import com.suntiago.lockpattern.PatternManager;
 import com.suntiago.network.network.download.DataChanger;
 import com.suntiago.network.network.download.DataWatcher;
 import com.suntiago.network.network.download.DownloadEntry;
@@ -26,6 +26,7 @@ public class MainActivity extends SlothActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        testPatternLok();
     }
 
     public void pickProvince(View view) {
@@ -36,6 +37,11 @@ public class MainActivity extends SlothActivity {
     protected void onResume() {
         super.onResume();
 
+    }
+
+    @Override
+    public void handleToast(int i, String s) {
+        
     }
 
     public void pickerProvince() {
@@ -67,7 +73,7 @@ public class MainActivity extends SlothActivity {
         if (PatternManager.get().isPatternSet()) {
             PatternManager.get().checkoutPattern();
         } else {
-            PatternManager.get().setPattert();
+            PatternManager.get().setPattern();
         }
     }
 

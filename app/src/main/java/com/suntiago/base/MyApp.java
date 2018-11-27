@@ -1,8 +1,9 @@
 package com.suntiago.base;
 
 import com.suntiago.baseui.App;
-import com.suntiago.baseui.lockPattern.PatternManager;
-import com.suntiago.baseui.utils.CrashHandler;
+import com.suntiago.baseui.utils.log.CrashHandler;
+import com.suntiago.lockpattern.PatternManager;
+
 
 /**
  * Created by zy on 2018/9/6.
